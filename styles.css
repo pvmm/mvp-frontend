@@ -14,6 +14,11 @@ header {
     width: 100%;
 }
 
+textarea {
+    width: 50%;
+    height: 30em;
+}
+
 table,
 th,
 td {
@@ -27,7 +32,7 @@ td {
     text-align: start;
 }
 
-table{
+table {
     background-color: white;
     width: 90%;
 }
@@ -52,18 +57,19 @@ tr:hover {
     background: rgb(200, 199, 199);
 }
 
-.addBtn {
-    padding: 9px 10px;
+.AddButton {
+    margin: 0px;
+    padding: 10px;
     background-color: rgb(35, 32, 24);
     color: white;
     text-align: center;
-    font-size: 16px;
+    font-size: 1em;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 2px;
+    border-radius: 8px;
 }
 
-.addBtn:hover {
+.AddButton:hover {
     background-color: #2ab53a;
     color: white;
 }

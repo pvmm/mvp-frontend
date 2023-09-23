@@ -4,31 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="styles.css">
-
-    <title>Cliente do blog</title>
+    <title>Cliente de blog</title>
 </head>
 
 <body>
      <!-- Cabeçalho de informações do sistema -->
     <header>
         <div class="title">
-            <h2>Lista de artigos</h2>
+            <h1>Cliente de Blog</h1>
         </div>
-       
     </header>
 
-     <!-- Opções para adicionar um novo item -->
-    <section class="NewPost">
-        <input type="text" id="title" placeholder="Título">
-        <input type="text" id="body" placeholder="Corpo">
-        <input type="text" id="author" placeholder="Autor">
-        <span onclick="newPost()" class="addBtn">Adicionar</span>
+    <section class="article">
+        <div class="title">
+            <h1>Artigo selecionado</h1>
+        </div>
+        <p id="title"></p>
+        <p id="date"></p>
+        <p id="author"></p>
+        <p id="body">nenhum artigo selecionado</p>
     </section>
 
     <!-- Tabela com items existentes -->
     <section class="items">
+        <div class="title">
+            <h1>Lista de artigos</h1>
+        </div>
         <table id="BlogTable">
             <tr>
                 <th>ID</th>
@@ -41,8 +43,24 @@
     </section>
 
     <script src="scripts.js"></script>
-</body>
 
+    <!-- Opções para adicionar um novo item -->
+    <section class="NewPost">
+        <div class="title">
+            <h1>Entrada de novo artigo</h1>
+        </div>
+        <input type="text" id="input-title" placeholder="Título">
+        <input type="text" id="input-author" placeholder="Autor">
+	<br/>
+	<br/>
+	<div>
+	<textarea id="input-body" placeholder="Corpo do artigo"></textarea>
+	</div>
+	<br/>
+        <span onclick="createItem()" class="AddButton">Adicionar</span>
+    </section>
+
+</body>
 </html>
 
 

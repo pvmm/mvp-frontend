@@ -38,36 +38,69 @@ const postItem = async (title, body, author) => {
 
 /**
  *--------------------------------------------------------------------------------------
- * Função para criar um botão para remover cada item da lista
+ * Função para criar um botão para abrir cada item da lista
  *--------------------------------------------------------------------------------------
  */
 const insertButton = (parent) => {
   let span = document.createElement("span");
-  let txt = document.createTextNode("\u00D7");
-  span.className = "close";
+  let txt = document.createTextNode("Abrir");
+  span.className = "open";
   span.appendChild(txt);
   parent.appendChild(span);
 }
 
 
+const loadArticle = (title, body, author, date) => {
+  let titleNode = document.getElementById("title");
+  let bodyNode  = document.getElementById("body");
+  let authorNode  = document.getElementById("author");
+  let dateNode  = document.getElementById("date");
+  console.log("XPTO!", bodyNode);
+  console.log("XPTO!", bodyNode.text);
+
+  titleNode.textContent = title;
+  bodyNode.textContent = body;
+  authorNode.textContent = author;
+  dateNode.textContent = date;
+}
+
+
 /**
  *--------------------------------------------------------------------------------------
- * Função para remover um item da lista de acordo com o click no botão de remover
+ * Função para carregar artigo do blog do servidor
  *--------------------------------------------------------------------------------------
  */
-const removeElement = () => {
-  let close = document.getElementsByClassName("close");
-  // var table = document.getElementById('myTable');
-  //let i = 0;
-  for (let i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
+const readArticle = async (id) => {
+  let url = 'http://127.0.0.1:5000/blog/' + id;
+  fetch(url, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Artigo carregado!", data);
+      loadArticle(data.title, data.body, data.author, data.date);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+/**
+ *--------------------------------------------------------------------------------------
+ * Função para criar botão de abrir um item da lista
+ *--------------------------------------------------------------------------------------
+ */
+const openElement = () => {
+  let actions = document.getElementsByClassName("open");
+
+  for (let i = 0; i < actions.length; i++) {
+    actions[i].onclick = function () {
       let div = this.parentElement.parentElement;
-      const nomeItem = div.getElementsByTagName('td')[0].innerHTML
-      if (confirm("Você tem certeza?")) {
-        div.remove()
-        deleteItem(nomeItem)
-        alert("Removido!")
-      }
+      const id = div.getElementsByTagName('td')[0].innerHTML;
+      readArticle(id);
     }
   }
 }
@@ -94,10 +127,10 @@ const deleteItem = (item) => {
  * Função para adicionar um novo artigo de blog
  *--------------------------------------------------------------------------------------
  */
-const newPost = () => {
-  let title = document.getElementById("title").value;
-  let body = document.getElementById("body").value;
-  let author = document.getElementById("author").value;
+const createItem = () => {
+  let title = document.getElementById("input-title").value;
+  let body = document.getElementById("input-body").value;
+  let author = document.getElementById("input-author").value;
   let date = new Date().toString();
 
   if (title === '') {
@@ -109,7 +142,8 @@ const newPost = () => {
   } else {
     //insertTable(title, author, date)
     postItem(title, body, author)
-      .then((data) => insertTable(data.id, data.title, data.author, data.date))
+      .then((response) => response.json())
+      .then((data) => insertTable(data.id, data.title, data.author, date))
       .catch((error) => {
         console.error('Error:', error);
       });
@@ -133,11 +167,11 @@ const insertTable = (id, title, author, date) => {
   }
 
   insertButton(row.insertCell(-1))
-  document.getElementById("title").value = "";
-  document.getElementById("body").value = "";
-  document.getElementById("author").value = "";
+  document.getElementById("input-title").value = "";
+  document.getElementById("input-author").value = "";
+  document.getElementById("input-body").value = "";
 
-  removeElement();
+  openElement();
 }
 
 /**
