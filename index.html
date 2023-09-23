@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Cliente do blog</title>
+</head>
+
+<body>
+     <!-- Cabeçalho de informações do sistema -->
+    <header>
+        <div class="title">
+            <h2>Lista de artigos</h2>
+        </div>
+       
+    </header>
+
+     <!-- Opções para adicionar um novo item -->
+    <section class="NewPost">
+        <input type="text" id="title" placeholder="Título">
+        <input type="text" id="body" placeholder="Corpo">
+        <input type="text" id="author" placeholder="Autor">
+        <span onclick="newPost()" class="addBtn">Adicionar</span>
+    </section>
+
+    <!-- Tabela com items existentes -->
+    <section class="items">
+        <table id="BlogTable">
+            <tr>
+                <th>ID</th>
+                <th width="100%">Título</th>
+                <th>Autor</th>
+                <th>Data</th>
+                <th>Ação</th>
+            </tr>
+        </table>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
+
+
